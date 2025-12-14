@@ -1,0 +1,11 @@
+Model Information:
+* title:	Floor lamp / Lampara de piso
+* source:	https://sketchfab.com/3d-models/floor-lamp-lampara-de-piso-686870b6dd8c4e649d2697d62256308c
+* author:	slend02385 (https://sketchfab.com/slend02385)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Floor lamp / Lampara de piso" (https://sketchfab.com/3d-models/floor-lamp-lampara-de-piso-686870b6dd8c4e649d2697d62256308c) by slend02385 (https://sketchfab.com/slend02385) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

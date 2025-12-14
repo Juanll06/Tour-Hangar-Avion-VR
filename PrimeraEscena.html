@@ -1,0 +1,168 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Escena 1: Recepción</title>
+    <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v4.0.1/dist/aframe-physics-system.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.2.0/dist/aframe-extras.min.js"></script>
+    
+    <script>
+        AFRAME.registerComponent('portal-activator', {
+            schema: {
+                target: {type: 'selector', default: '#rig'},
+                distance: {type: 'number', default: 2.5},
+                messageText: {type: 'string', default: 'PULSA para entrar al HANGAR'},
+                linkUrl: {type: 'string', default: 'SegundaEscena.html'} 
+            },
+            init: function () {
+                this.cameraEl = this.data.target;
+                this.entityEl = this.el;
+
+                // 1. CREACIÓN DEL MENSAJE (El texto que aparece)
+                this.messageEl = document.createElement('a-entity');
+                this.messageEl.setAttribute('text', {
+                    value: this.data.messageText,
+                    align: 'center',
+                    color: '#FFD700',
+                    width: 5
+                });
+                this.messageEl.setAttribute('position', {x: 0, y: 1.8, z: 0.1});
+                this.messageEl.setAttribute('visible', 'false');
+                
+                this.entityEl.appendChild(this.messageEl);
+
+                // 2. DETECCIÓN DE CLIC
+                this.el.addEventListener('click', () => { 
+                    if (this.messageEl.getAttribute('visible')) {
+                        console.log(`Navegando a: ${this.data.linkUrl}`); 
+                        window.location.href = this.data.linkUrl;
+                    }
+                });
+            },
+            tick: function () {
+                const playerPos = this.cameraEl.object3D.position;
+                const entityPos = this.entityEl.object3D.position;
+                const distance = playerPos.distanceTo(entityPos);
+
+                // 3. LÓGICA DE DISTANCIA
+                if (distance <= this.data.distance) {
+                    this.messageEl.setAttribute('visible', 'true');
+                } else {
+                    this.messageEl.setAttribute('visible', 'false');
+                }
+            }
+        });
+    </script>
+</head>
+
+<body>
+<a-scene physics="gravity: -9.8; debug: true"> <a-assets>
+        <img id="TechoRecepcion" src="./assets/texturas/TechoRecepcion.jpg">
+        <img id="SueloRecepcion" src="./assets/texturas/SueloRecepcion.jpg">
+        <img id="ParedRecepcion" src="./assets/texturas/ParedRecepcion.jpg">
+        <a-asset-item id="recepcionista" src="./assets/Modelos3D/Persona/scene.gltf"></a-asset-item>
+        <a-asset-item id="mesa" src="./assets/Modelos3D/Mesa/scene.gltf"></a-asset-item>
+        <a-asset-item id="lampara" src="./assets/Modelos3D/Lampara/scene.gltf"></a-asset-item>
+    </a-assets>
+
+    <a-plane 
+    position="0 3 0" 
+    rotation="90 0 0" 
+    width="10" 
+    height="10" 
+    material="src: #TechoRecepcion; repeat: 5 5" 
+    static-body></a-plane>
+
+    <a-plane 
+    position="0 0 0" 
+    rotation="-90 0 0" 
+    width="10" 
+    height="10" 
+    material="src: #SueloRecepcion; repeat: 2 2" 
+    static-body></a-plane>
+    
+    <a-box 
+    position="0 1.5 -5" 
+    width="10" height="3" 
+    depth="0.2" 
+    material="src: #ParedRecepcion; repeat: 2 2" 
+    static-body></a-box> 
+    
+    <a-box 
+    position="0 1.5 5" 
+    width="10"
+    height="3" 
+    depth="0.2"
+    material="src: #ParedRecepcion; repeat: 2 2" 
+    static-body></a-box>
+
+    <a-box 
+    position="-5 1.5 0" 
+    rotation=" 0 90 0" 
+    width="10" 
+    height="3" 
+    depth="0.2" 
+    material="src: #ParedRecepcion; repeat: 2 2" 
+    static-body></a-box>
+
+    <a-box 
+    position="5 1.5 0" 
+    rotation=" 0 90 0" 
+    width="10" 
+    height="3" 
+    depth="0.2" 
+    material="src: #ParedRecepcion; repeat: 2 2" 
+    static-body></a-box>
+    
+    <a-text
+        value="RECEPCION HANGAR"
+        position="0 2.5 -4.9" 
+        rotation="0 0 0"
+        align="center"
+        color="black"
+        width="7"   
+    ></a-text>
+
+    <a-entity 
+        position="0 1 -4" 
+        scale="1 1 1" 
+        gltf-model="#recepcionista" 
+        static-body="shape: box" 
+        portal-activator="distance: 2; linkUrl: SegundaEscena.html"
+        class="clickable"
+    ></a-entity>
+    
+    <a-entity position="0 0 -3" 
+    scale="2 2.5 1" 
+    gltf-model="#mesa" 
+    static-body="shape: box"></a-entity>
+
+    <a-entity 
+    position="1.5 0.2 -4" 
+    scale="1 1.5 1" 
+    gltf-model="#lampara" 
+    static-body="shape: box"></a-entity>
+
+    <a-entity 
+    id="rig" 
+    movement-controls="speed: 0.15; constrainToNavMesh: false;" 
+    position="0 1 1" 
+    kinematic-body="enabled: true; mass: 5;" 
+    collision-filter="group: player; mask: environment">
+    <a-entity 
+        camera look-controls position="0 0.6 0" 
+        raycaster="objects: .clickable" 
+        cursor="rayOrigin: mouse">
+        </a-entity>
+    </a-entity>
+
+    <a-sky color="white"></a-sky>
+    <a-entity light="angle: 86.45; color: #d5d4c8; decay: 0.43; intensity: 7.58; penumbra: 0.21; type: spot; shadowBias: -0.81" 
+    position="1.47805 2.1975 -4.13677"></a-entity>
+
+    <a-entity light="color: #ffffff; intensity: 0.96; type: ambient" 
+    position="0 2.4915 0"></a-entity>
+
+</a-scene>
+</body>
+</html>

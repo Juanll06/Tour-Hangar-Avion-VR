@@ -1,0 +1,124 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Escena 2: Hangar/Taller</title>
+    <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v4.0.1/dist/aframe-physics-system.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.2.0/dist/aframe-extras.min.js"></script>
+    
+    <script>
+        AFRAME.registerComponent('link-to-scene', {
+            schema: { url: { type: 'string' } },
+            init: function () {
+                this.el.addEventListener('click', () => {
+                    window.location.href = this.data.url;
+                });
+            }
+        });
+    </script>
+</head>
+
+<body>
+<a-scene physics="gravity: -9.8; debug: false"> 
+    
+    <a-assets>
+        <img id="TechoHangar" src="./assets/texturas/TechoAngar.jpg">
+        <img id="SueloHangar" src="./assets/texturas/SueloHangar.jpg">
+        <img id="ParedHangar" src="./assets/texturas/Paredhangar.jpg">
+        
+        </a-assets>
+
+    <a-plane 
+    position="0 3 0" 
+    rotation="90 0 0" 
+    width="10" 
+    height="10" 
+    material="src: #TechoHangar; repeat: 5 5" 
+    static-body></a-plane>
+
+
+    <a-plane
+        position="0 0 0"
+        rotation="-90 0 0"
+        width="10"
+        height="10"
+        material="src: #SueloHangar; repeat: 8 8"
+        static-body                       
+    ></a-plane>
+
+    <a-box
+        position="0 1.5 -5"
+        width="10"
+        height="3"
+        depth="0.2"
+        material="src: #ParedHangar"
+        static-body
+    ></a-box>
+    <a-box
+        position="0 1.5 5"
+        width="10"
+        height="3"
+        depth="0.2"
+        material="src: #ParedHangar"
+        static-body
+    ></a-box>
+    <a-box
+        position="-5 1.5 0"
+        rotation=" 0 90 0"
+        width="10"
+        height="3"
+        depth="0.2"
+        material="src: #ParedHangar"
+        static-body
+    ></a-box>
+    <a-box
+        position="5 1.5 0"
+        rotation=" 0 90 0"
+        width="10"
+        height="3"
+        depth="0.2"
+        material="src: #ParedHangar"
+        static-body
+    ></a-box>
+    
+    <a-plane
+        position="0 3 0"           
+        rotation="-90 0 0"           
+        width="10"                   
+        height="10"                  
+        color="#333333"             
+        static-body       
+    ></a-plane>
+
+
+    <a-box
+        id="portal-avion"
+        position="0 1.5 -4.8"       width="1.5" height="1" depth="0.1"
+        color="#006400"              link-to-scene="url: TerceraEscena.html" shadow="cast: true"
+    >
+        <a-text value="SACAR AVION" 
+                align="center" 
+                position="0 0 0.06" 
+                color="white" 
+                width="2">
+        </a-text>
+
+    </a-box>
+
+
+    <a-sky color="black"></a-sky> <a-light type="spot" color="#FFFFFF" intensity="2" position="0 2.8 0" angle="90" shadow="cast: true; receive: true"></a-light>
+    <a-light type="ambient" color="#AAAAAA" intensity="0.5"></a-light>
+
+
+    <a-entity id="rig" movement-controls="speed: 0.2" position="0 1 4" kinematic-body>
+        <a-entity 
+            camera look-controls position="0 0.6 0" 
+            raycaster="objects: [link-to-scene]" 
+            cursor="rayOrigin: mouse"
+        ></a-entity>
+    </a-entity>
+    <a-entity light="intensity: 0.77" position="0 2.78725 0"></a-entity>
+
+</a-scene>
+</body>
+</html>

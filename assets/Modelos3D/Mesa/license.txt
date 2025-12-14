@@ -1,0 +1,11 @@
+Model Information:
+* title:	Mesa low poly
+* source:	https://sketchfab.com/3d-models/mesa-low-poly-65e3ac93e00a4660adf476c8c2f38fb3
+* author:	Dacoher (https://sketchfab.com/Dacoher)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Mesa low poly" (https://sketchfab.com/3d-models/mesa-low-poly-65e3ac93e00a4660adf476c8c2f38fb3) by Dacoher (https://sketchfab.com/Dacoher) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
