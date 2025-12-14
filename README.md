@@ -2,7 +2,7 @@
 
 ## **Equipo:** [Juan López Lara]
 ## **Opción:** [B Sector Creativa]
-## **[URL: ** *[Enlace al repositorio de GitHub o dónde se aloje el proyecto]* **]**
+## **[URL: ** *[https://github.com/Juanll06/Tour-Hangar-Avion-VR]* **]**
 
 ---
 
